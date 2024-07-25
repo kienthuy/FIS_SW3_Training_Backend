@@ -1,0 +1,28 @@
+<html>
+  <head>
+      <meta charset="UTF-8">
+    </head>
+<body>
+  <h1>Mở 1 tài khoản ngân hàng mới</h1>
+  <button onclick="submitNewCustomerOrder()">Nhấn vào đây để khởi tạo tài khoản ngân hàng</button>
+  
+  <div id="thanks"></div>
+</body>
+
+	<script type="text/javascript">
+    var count = 0;
+		function submitNewCustomerOrder() {
+			 $.ajax({
+              url: "./customer",
+              type: "put",
+              data: {}
+          }).done(function(result) {
+            count = count + 1;
+            $('#thanks').html('Đơn đăng ký tài khoản ngân hàng đã được gửi thành công. #' + count);
+          })
+		}
+	</script>
+  <script src="/webjars/jquery/3.6.1/jquery.min.js"></script>
+  <script type="text/javascript" charset="UTF-8" src="xyz.js"></script>
+
+</html>

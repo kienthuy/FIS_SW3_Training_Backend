@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fis.portal.mapper.BookingMapper">
+
+    <select id="search" parameterType="com.fis.portal.model.Booking" resultType="com.fis.portal.model.Booking">
+        SELECT * FROM portal_booking
+        <where>
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+        
+        </where>
+    </select>
+
+    <select id="count" parameterType="com.fis.portal.model.Booking" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM portal_booking
+        <where>
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+         
+        </where>
+    </select>
+
+    <insert id="create" parameterType="com.fis.portal.model.Booking">
+        INSERT INTO portal_booking (
+        	name, 
+        	email, 
+        	phone, 
+        	branch_code,
+        	province_code, 
+        	district_code, 
+        	ward_code, 
+        	product,
+        	booking_time,
+        	created_date, 
+        	created_by,
+        	status
+)        VALUES (
+        	#{name}, 
+        	#{email}, 
+        	#{phone}, 
+        	#{branchCode}, 
+        	#{provinceCode}, 
+        	#{districtCode}, 
+        	#{wardCode},
+        	#{product},
+        	#{bookingTime},
+        	NOW(),
+        	#{createdBy},
+        	'OPEN'
+        )
+    </insert>
+
+    <update id="update" parameterType="com.fis.portal.model.Booking">
+        UPDATE portal_booking
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="branchCode != null">branch_code = #{branchCode},</if>
+            <if test="provinceCode != null">province_code = #{provinceCode},</if>
+            <if test="districtCode != null">district_code = #{districtCode},</if>
+            <if test="wardCode != null">ward_code = #{wardCode},</if>
+            <if test="updatedDate != null">updated_date = #{updatedDate},</if>
+            <if test="updatedBy != null">updated_by = #{updatedBy},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="findById" parameterType="java.lang.String" resultType="com.fis.portal.model.Booking">
+        SELECT * FROM portal_booking WHERE id = #{id}
+    </select>
+
+</mapper>

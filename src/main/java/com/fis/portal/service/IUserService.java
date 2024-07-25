@@ -1,0 +1,15 @@
+package com.fis.portal.service;
+
+import com.fis.portal.model.BaseResponse;
+import com.fis.portal.model.User;
+
+public interface IUserService {
+	
+	BaseResponse search(User request);
+
+	BaseResponse update(User user);
+
+	BaseResponse create(User user);
+
+	
+}

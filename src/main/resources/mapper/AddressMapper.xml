@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fis.portal.mapper.AddressMapper">
+
+	<select id="getProvince" resultType="com.fis.portal.model.Province">
+        <![CDATA[
+			SELECT * FROM portal_province
+		]]>
+	</select>
+	
+	<select id="getDistrict" resultType="com.fis.portal.model.District">
+        <![CDATA[
+			SELECT * FROM portal_district
+		]]>
+	</select>
+	
+	<select id="getWard" resultType="com.fis.portal.model.Ward">
+        <![CDATA[
+			SELECT * FROM portal_ward
+		]]>
+	</select>
+	
+		<select id="getBranch" resultType="com.fis.portal.model.Branch">
+        <![CDATA[
+			SELECT * FROM portal_branch
+		]]>
+	</select>
+
+	<select id="getProduct" resultType="com.fis.portal.model.Product">
+        <![CDATA[
+			SELECT * FROM portal_product
+		]]>
+	</select>
+	
+
+	
+
+
+</mapper>

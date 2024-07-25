@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fis.portal.mapper.PositionMapper">
+
+	<select id="search" resultType="com.fis.portal.model.Position">
+        <![CDATA[
+			SELECT * FROM portal_position
+		]]>
+		<where>
+			<if test="code != null and code != '' ">
+				AND code = #{code}
+			</if>
+		</where>
+		<if test="limit > 0">
+			OFFSET (#{page}-1) * #{limit} FETCH NEXT #{limit} ROWS
+			ONLY
+		</if>
+	</select>
+
+	<!-- Phương thức findByCode -->
+	<select id="findByCode" resultType="com.fis.portal.model.Position">
+        <![CDATA[
+            SELECT * FROM portal_position
+            WHERE code = #{code}
+        ]]>
+	</select>
+
+	<select id="count" resultType="Integer">
+        <![CDATA[
+			SELECT COUNT(*) FROM portal_position
+		]]>
+		<where>
+			<if test="code != null and code != '' ">
+				AND code = #{code}
+			</if>
+		</where>
+	</select>
+
+
+	<insert id="create">
+		INSERT INTO portal_position(
+			code,
+			name,
+			position,
+			department,
+			created_date,
+			created_by
+		)
+		VALUES (
+			#{code},
+			#{name},
+			#{position},
+			#{department},
+			NOW(),
+			#{createdBy}
+		);
+	</insert>
+
+
+	<update id="update">
+		UPDATE portal_position
+		SET name 			= #{name},
+			position		= #{position},
+			department 		= #{department},
+			updated_date 	= NOW(),
+			updated_by 		= #{updatedBy}
+		WHERE code 	= #{code};
+	</update>
+
+
+</mapper>
