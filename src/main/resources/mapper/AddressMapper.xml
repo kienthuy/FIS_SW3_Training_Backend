@@ -9,18 +9,30 @@
 	</select>
 	
 	<select id="getDistrict" resultType="com.fis.portal.model.District">
-        <![CDATA[
-			SELECT * FROM portal_district
-		]]>
+	    <![CDATA[
+	        SELECT * FROM portal_district
+	    ]]>
+	    <where>
+	        <if test="provinceCode != null and provinceCode != ''">
+	            AND province_code = #{provinceCode}
+	        </if>
+	    </where>
 	</select>
+
 	
 	<select id="getWard" resultType="com.fis.portal.model.Ward">
-        <![CDATA[
-			SELECT * FROM portal_ward
-		]]>
+	    <![CDATA[
+	        SELECT * FROM portal_ward
+	    ]]>
+	    <where>
+	        <if test="districtCode != null and districtCode != ''">
+	            AND district_code = #{districtCode}
+	        </if>
+	    </where>
 	</select>
+
 	
-		<select id="getBranch" resultType="com.fis.portal.model.Branch">
+	<select id="getBranch" resultType="com.fis.portal.model.Branch">
         <![CDATA[
 			SELECT * FROM portal_branch
 		]]>
