@@ -7,7 +7,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-@MapperScan(basePackages = {"com.fis.portal.mapper"})
+@MapperScan(basePackages = { "com.fis.portal.mapper" })
 public class PortalApplication extends SpringBootServletInitializer {
 
 	@Override

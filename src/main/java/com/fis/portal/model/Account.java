@@ -2,7 +2,7 @@ package com.fis.portal.model;
 
 import java.util.Date;
 
-public class Product {
+public class Account {
     private String code;
     private String name;
     private String nameEn;

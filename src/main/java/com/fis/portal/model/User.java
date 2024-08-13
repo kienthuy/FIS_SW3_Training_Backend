@@ -13,6 +13,7 @@ public class User extends Paging {
     private String gender;
     private String address;
     private String status;
+    private String password;
     private Date createdDate;
     private String createdBy;
     private Date updatedDate;
@@ -129,4 +130,14 @@ public class User extends Paging {
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
     }
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+    
 }
+

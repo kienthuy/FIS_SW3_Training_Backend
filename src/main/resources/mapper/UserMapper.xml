@@ -84,6 +84,39 @@
 			updated_by 	= #{updatedBy}
 		WHERE code 	= #{code};
 	</update>
+	
+	<insert id="register">
+		INSERT INTO portal_user(
+			code,
+			name,
+			position,
+			department,
+			email,
+			phone,
+			citizen_id,
+			gender,
+			address,
+			status,
+			password,
+			created_date,
+			created_by
+		)
+		VALUES (
+			#{code},
+			#{name},
+			#{position},
+			#{department},
+			#{email},
+			#{phone},
+			#{citizenId},
+			#{gender},
+			#{address},
+			#{status},
+			#{password},
+			NOW(),
+			#{createdBy}
+		);
+	</insert>
 
 
 </mapper>

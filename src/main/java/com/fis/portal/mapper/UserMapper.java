@@ -13,5 +13,6 @@ public interface UserMapper {
 	int update(User user);
 	int create(User user);
 	User findByCode(String code);
+	int register(User user);
     
 }

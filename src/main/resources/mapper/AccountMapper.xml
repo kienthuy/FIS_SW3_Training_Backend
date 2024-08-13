@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fis.portal.mapper.AccountMapper">
+
+    <select id="search" parameterType="com.fis.portal.model.Account" resultType="com.fis.portal.model.Account">
+        SELECT * FROM portal_account
+        <where>
+            <if test="code != null">
+                AND code = #{code}
+            </if>
+            <if test="name != null">
+                AND name = #{name}
+            </if>
+            <!-- Add other search criteria here -->
+        </where>
+    </select>
+
+    <select id="count" parameterType="com.fis.portal.model.Account" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM portal_account
+        <where>
+            <if test="code != null">
+                AND code = #{code}
+            </if>
+            <if test="name != null">
+                AND name = #{name}
+            </if>
+            <!-- Add other count criteria here -->
+        </where>
+    </select>
+
+    <insert id="create" parameterType="com.fis.portal.model.Account">
+        INSERT INTO portal_account (
+            code, 
+            name, 
+            name_en, 
+            created_date, 
+            created_by
+        ) VALUES (
+            #{code}, 
+            #{name}, 
+            #{nameEn},  
+            NOW(), 
+            #{createdBy}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.fis.portal.model.Account">
+        UPDATE portal_account
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="nameEn != null">name_en = #{nameEn},</if>
+            <if test="updatedDate != null">updated_date = #{updatedDate},</if>
+            <if test="updatedBy != null">updated_by = #{updatedBy},</if>
+        </set>
+        WHERE code = #{code}
+    </update>
+
+    <select id="findByCode" parameterType="java.lang.String" resultType="com.fis.portal.model.Account">
+        SELECT * FROM portal_account WHERE code = #{code}
+    </select>
+
+</mapper>
