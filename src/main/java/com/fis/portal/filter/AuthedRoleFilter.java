@@ -35,13 +35,13 @@ public class AuthedRoleFilter extends OncePerRequestFilter {
           throws ServletException, IOException {
     var path = request.getRequestURI().split("/api/portal")[1];
     var authentication = SecurityContextHolder.getContext().getAuthentication();
-    var roleCode = String.valueOf(authentication.getAuthorities().iterator().next());
-
-    if (hasAuthentication(path) || checkPath(roleCode, path)) {
-      filterChain.doFilter(request, response);
+    if (!hasAuthentication(path) && Objects.nonNull(authentication)) {
+      var roleCode = String.valueOf(authentication.getAuthorities().iterator().next());
+      if (!checkPath(roleCode, path)) {
+        response.setStatus(HttpStatus.FORBIDDEN.value());
+      }
     }
-
-    response.setStatus(HttpStatus.FORBIDDEN.value());
+    filterChain.doFilter(request, response);
   }
 
   private boolean hasAuthentication(String uri) {
