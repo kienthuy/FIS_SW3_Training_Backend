@@ -31,27 +31,28 @@ public class AuthServiceImpl implements IAuthService {
     Authentication authed = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(request.getCode(), request.getPassword()));
     UserDetails userDetails = (UserDetails) authed.getPrincipal();
-    return new BaseResponse("0", JwtProvider.generateToken(userDetails.getUsername()));
+    return new BaseResponse(JwtProvider.generateToken(userDetails.getUsername()));
   }
 
   @Override
   public BaseResponse register(User user) {
 	  try {
 		  User userCheck = userMapper.findByCode(user.getCode());
-		    if (Objects.nonNull(userCheck)) {
-		      return new BaseResponse("1", "Username đã tồn tại");
-		    }
+          if (Objects.nonNull(userCheck)) {
+            return new BaseResponse("1", "Username đã tồn tại");
+          }
 
-		    user.setPassword(passwordEncoder.encode(user.getPassword()));
-		    
-		    // Thực hiện tạo mới người dùng
-            int result = userMapper.register(user);
-            if(result > 0) {
-            	return new BaseResponse("0","Tạo người dùng thành công");
-            }else {
-            	return new BaseResponse("1","Tạo người dùng thất bại");
-            }
-     
+          user.setPassword(passwordEncoder.encode(user.getPassword()));
+          user.setRoleCode("USER");
+
+          // Thực hiện tạo mới người dùng
+          int result = userMapper.register(user);
+          if(result > 0) {
+              return new BaseResponse("0","Tạo người dùng thành công");
+          }else {
+              return new BaseResponse("1","Tạo người dùng thất bại");
+          }
+
 	} catch (Exception e) {
 		// TODO: handle exception
 		e.printStackTrace();
