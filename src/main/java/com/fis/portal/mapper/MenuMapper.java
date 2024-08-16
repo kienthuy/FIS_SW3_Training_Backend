@@ -13,5 +13,6 @@ public interface MenuMapper {
 	int update(Menu menu);
 	int create(Menu menu);
 	Menu findByCode(String code);
+	List<Menu> findPathByRoleCode(String roleCode);
     
 }

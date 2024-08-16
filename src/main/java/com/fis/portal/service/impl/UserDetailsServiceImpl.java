@@ -20,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     User user = userMapper.findByCode(username);
     if (Objects.isNull(user)) {
-      throw new UsernameNotFoundException("Người dung không tồn tại");
+      throw new UsernameNotFoundException("Người dùng không tồn tại");
     }
 
     return new org.springframework.security.core.userdetails.User(

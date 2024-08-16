@@ -32,7 +32,8 @@
 
     <insert id="create" parameterType="com.fis.portal.model.Menu">
         INSERT INTO portal_menu (
-            code, 
+            code,
+            parent_code
             name, 
             name_en,
             icon,
@@ -41,7 +42,8 @@
             created_date, 
             created_by
         ) VALUES (
-            #{code}, 
+            #{code},
+            #{parentCode},
             #{name}, 
             #{nameEn},
             #{icon},

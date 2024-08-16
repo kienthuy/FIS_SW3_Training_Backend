@@ -18,6 +18,7 @@ public class User extends Paging {
     private String createdBy;
     private Date updatedDate;
     private String updatedBy;
+    private String roleCode;
 
     public String getCode() {
         return code;
@@ -138,6 +139,12 @@ public class User extends Paging {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-    
+    public String getRoleCode() {
+        return roleCode;
+    }
+
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
+    }
 }
 

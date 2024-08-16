@@ -13,6 +13,7 @@ public class Menu {
     private String createdBy;
     private Date updatedDate;
     private String updatedBy;
+    private String parentCode;
 
     public String getCode() {
         return code;
@@ -92,6 +93,13 @@ public class Menu {
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
+    }
+    public String getParentCode() {
+        return parentCode;
+    }
+
+    public void setParentCode(String parentCode) {
+        this.parentCode = parentCode;
     }
 }
 
