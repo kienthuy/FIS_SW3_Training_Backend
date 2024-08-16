@@ -3,6 +3,8 @@ package com.fis.portal.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.fis.portal.mapper.MenuMapper;
@@ -59,5 +61,10 @@ public class MenuServiceImpl implements IMenuService {
         }
     }
 
-
+    @Override
+    public BaseResponse findMenuByRole() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String roleCode = String.valueOf(authentication.getAuthorities().iterator().next());
+        return new BaseResponse(menuMapper.findPathByRoleCode(roleCode)) ;
+    }
 }

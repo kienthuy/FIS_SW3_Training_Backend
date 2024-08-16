@@ -1,6 +1,8 @@
 package com.fis.portal.config;
 
+import com.fis.portal.filter.AuthedRoleFilter;
 import com.fis.portal.filter.JwtRequestFilter;
+import com.fis.portal.mapping.AuthedMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -20,15 +23,19 @@ public class WebSecurityConfig {
   @Autowired
   private JwtRequestFilter jwtRequestFilter;
 
+  @Autowired
+  private AuthedRoleFilter authedRoleFilter;
+
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf().disable();
 
     http.authorizeHttpRequests((requests) -> requests
-            .requestMatchers("/auth/login", "/auth/register").permitAll()
+            .requestMatchers(AuthedMapping.MATCHERS).permitAll()
             .anyRequest().authenticated());
 
     http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+    http.addFilterAfter(authedRoleFilter, UsernamePasswordAuthenticationFilter.class);
 
     return http.build();
   }

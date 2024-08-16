@@ -48,7 +48,6 @@
 			citizen_id,
 			gender,
 			address,
-			role_code,
 			status,
 			created_date,
 			created_by
@@ -63,11 +62,10 @@
 			#{citizenId},
 			#{gender},
 			#{address},
-			#{roleCode},
 			#{status},
 			NOW(),
 			#{createdBy}
-		)
+		);
 	</insert>
 
 
@@ -83,8 +81,7 @@
 			address 	= #{address},
 			status 		= #{status},
 			updated_date = NOW(),
-			updated_by 	= #{updatedBy},
-			role_code 	= #{roleCode}
+			updated_by 	= #{updatedBy}
 		WHERE code 	= #{code};
 	</update>
 	
@@ -102,8 +99,7 @@
 			status,
 			password,
 			created_date,
-			created_by,
-			role_code
+			created_by
 		)
 		VALUES (
 			#{code},
@@ -118,8 +114,7 @@
 			#{status},
 			#{password},
 			NOW(),
-			#{createdBy},
-			#{roleCode}
+			#{createdBy}
 		);
 	</insert>
 

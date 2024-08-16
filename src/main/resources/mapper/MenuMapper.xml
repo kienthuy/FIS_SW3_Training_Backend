@@ -32,8 +32,7 @@
 
     <insert id="create" parameterType="com.fis.portal.model.Menu">
         INSERT INTO portal_menu (
-            code,
-            parent_code
+            code, 
             name, 
             name_en,
             icon,
@@ -42,8 +41,7 @@
             created_date, 
             created_by
         ) VALUES (
-            #{code},
-            #{parentCode},
+            #{code}, 
             #{name}, 
             #{nameEn},
             #{icon},
@@ -70,6 +68,12 @@
 
     <select id="findByCode" parameterType="java.lang.String" resultType="com.fis.portal.model.Menu">
         SELECT * FROM portal_menu WHERE code = #{code}
+    </select>
+
+    <select id="findPathByRoleCode" parameterType="java.lang.String" resultType="com.fis.portal.model.Menu">
+        SELECT m.* FROM portal_menu m
+                            INNER JOIN portal_menu_role mr ON mr.menu_code = m.code
+        WHERE mr.role_code = #{roleCode}
     </select>
 
 </mapper>

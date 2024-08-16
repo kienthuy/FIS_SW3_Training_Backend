@@ -11,5 +11,5 @@ public interface IMenuService {
 
 	BaseResponse create(Menu menu);
 
-	
+	BaseResponse findMenuByRole();
 }
