@@ -1,23 +1,20 @@
 package com.fis.portal.filter;
 
-import com.fis.portal.mapper.MenuMapper;
-import com.fis.portal.mapper.MenuRoleMapper;
-import com.fis.portal.mapping.AuthedMapping;
-import com.fis.portal.model.Menu;
 import java.io.IOException;
-import java.net.http.HttpResponse;
 import java.util.Arrays;
 import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.fis.portal.mapper.MenuMapper;
+import com.fis.portal.mapping.AuthedMapping;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
