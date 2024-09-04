@@ -3,33 +3,32 @@ package com.fis.portal.model;
 
 public class BaseListResponse extends BaseResponse{
 
-    private long totalRecord;
+    private long total;
 
-    public long getTotalRecord() {
-        return totalRecord;
+    public long getTotal() {
+        return total;
     }
 
-    public void setTotalRecord(long totalRecord) {
-        this.totalRecord = totalRecord;
+    public void setTotal(long total) {
+        this.total = total;
     }
 
-   
     public BaseListResponse() {
     }
 
-    public BaseListResponse(long totalRecord) {
+    public BaseListResponse(long total) {
         super();
-        this.totalRecord = totalRecord;
+        this.total = total;
     }
 
-    public BaseListResponse(Object data,long totalRecord) {
+    public BaseListResponse(Object data,long total) {
         super(data);
-        this.totalRecord = totalRecord;
+        this.total = total;
     }
 
-    public BaseListResponse(Object data, String errorCode, String errorDesc, long totalRecord) {
+    public BaseListResponse(Object data, String errorCode, String errorDesc, long total) {
         super(data, errorCode, errorDesc);
-        this.totalRecord = totalRecord;
+        this.total = total;
     }
 
     public BaseListResponse(Object data) {

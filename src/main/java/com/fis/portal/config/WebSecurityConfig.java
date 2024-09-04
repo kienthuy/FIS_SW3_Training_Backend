@@ -15,6 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
@@ -28,6 +30,7 @@ public class WebSecurityConfig {
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http.cors();
     http.csrf().disable();
 
     http.authorizeHttpRequests((requests) -> requests
@@ -49,5 +52,19 @@ public class WebSecurityConfig {
   public AuthenticationManager authenticationManager(
           AuthenticationConfiguration authenticationConfiguration) throws Exception {
     return authenticationConfiguration.getAuthenticationManager();
+  }
+
+  @Bean
+  public WebMvcConfigurer corsConfigurer() {
+    return new WebMvcConfigurer() {
+      @Override
+      public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")  // Áp dụng CORS cho tất cả các đường dẫn
+                .allowedOrigins("http://localhost:8889")  // Cho phép các origin cụ thể
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")  // Các phương thức HTTP được phép
+                .allowedHeaders("*")  // Cho phép tất cả các header
+                .allowCredentials(true);  // Cho phép gửi credentials (cookies, headers)
+      }
+    };
   }
 }

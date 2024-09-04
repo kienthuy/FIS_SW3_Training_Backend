@@ -26,7 +26,7 @@ public class MenuController {
     public ResponseEntity<BaseResponse> search(@RequestBody Menu request) {
         return new ResponseEntity<>(menuService.search(request), HttpStatus.OK);
     }
-	// Thêm phương thức create
+
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BaseResponse> create(@RequestBody Menu menu) {
         return new ResponseEntity<>(menuService.create(menu), HttpStatus.CREATED);
@@ -34,11 +34,6 @@ public class MenuController {
     @PostMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BaseResponse> update(@RequestBody Menu menu) {
         return new ResponseEntity<>(menuService.update(menu), HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/get", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BaseResponse> get() {
-        return new ResponseEntity<>(menuService.findMenuByRole(), HttpStatus.OK);
     }
 
 }

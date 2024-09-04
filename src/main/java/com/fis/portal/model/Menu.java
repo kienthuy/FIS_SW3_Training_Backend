@@ -9,6 +9,7 @@ public class Menu {
     private String icon;
     private String path;
     private String status;
+    private String parentCode;
     private Date createdDate;
     private String createdBy;
     private Date updatedDate;
@@ -92,6 +93,14 @@ public class Menu {
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    public String getParentCode() {
+        return parentCode;
+    }
+
+    public void setParentCode(String parentCode) {
+        this.parentCode = parentCode;
     }
 }
 
