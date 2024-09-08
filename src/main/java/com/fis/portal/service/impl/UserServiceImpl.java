@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.fis.portal.mapper.UserMapper;
 import com.fis.portal.model.BaseListResponse;
+import com.fis.portal.model.BasePaging;
 import com.fis.portal.model.BaseResponse;
 import com.fis.portal.model.User;
 import com.fis.portal.service.IUserService;
@@ -17,11 +18,16 @@ public class UserServiceImpl implements IUserService {
 	private UserMapper userMapper;
 
 	@Override
-	public BaseResponse search(User request) {
+	public BaseListResponse search(User request) {
 		// TODO Auto-generated method stub
 		List<User> list = userMapper.search(request);
 		int totalRecords = userMapper.count(request);
-		return new BaseListResponse(list, totalRecords);
+		
+		BasePaging basePaging = new BasePaging();
+        basePaging.setData(list);
+        basePaging.setTotal(totalRecords);
+        
+        return new BaseListResponse("OK", true , basePaging);
 	}
 
 	@Override

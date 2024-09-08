@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fis.portal.model.BaseResponse;
 
 import com.fis.portal.model.Account;
+import com.fis.portal.model.BaseListResponse;
 import com.fis.portal.service.IAccountService;
 
 
@@ -25,7 +26,7 @@ public class AccountController {
     private IAccountService accountService;
 
     @PostMapping(value = "/search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BaseResponse> search(@RequestBody Account request) {
+    public ResponseEntity<BaseListResponse> search(@RequestBody Account request) {
         return new ResponseEntity<>(accountService.search(request), HttpStatus.OK);
     }
 

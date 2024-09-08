@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.fis.portal.mapper.RoleMapper;
 import com.fis.portal.model.BaseListResponse;
+import com.fis.portal.model.BasePaging;
 import com.fis.portal.model.BaseResponse;
 import com.fis.portal.model.Role;
 import com.fis.portal.service.IRoleService;
@@ -17,14 +18,19 @@ public class RoleServiceImpl implements IRoleService {
     private RoleMapper roleMapper;
 
     @Override
-    public BaseResponse search(Role request) {
+    public BaseListResponse search(Role request) {
         try {
             List<Role> list = roleMapper.search(request);
             int totalRecords = roleMapper.count(request);
-            return new BaseListResponse(list, totalRecords);
+            
+            BasePaging basePaging = new BasePaging();
+	        basePaging.setData(list);
+	        basePaging.setTotal(totalRecords);
+	        
+	        return new BaseListResponse("OK", true , basePaging);
         } catch (Exception ex) {
             ex.printStackTrace();
-            return new BaseResponse("1", "Tìm kiếm vai trò thất bại");
+            return new BaseListResponse("NO OK", false , null);
         }
     }
 

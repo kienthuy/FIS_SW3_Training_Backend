@@ -1,11 +1,12 @@
 package com.fis.portal.service;
 
 import com.fis.portal.model.Account;
+import com.fis.portal.model.BaseListResponse;
 import com.fis.portal.model.BaseResponse;
 
 public interface IAccountService {
 
-    BaseResponse search(Account request);
+	BaseListResponse search(Account request);
 
     BaseResponse create(Account account);
 

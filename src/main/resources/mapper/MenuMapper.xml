@@ -71,9 +71,12 @@
     </select>
 
     <select id="findPathByRoleCode" parameterType="java.lang.String" resultType="com.fis.portal.model.Menu">
-        SELECT m.* FROM portal_menu m
-                            INNER JOIN portal_menu_role mr ON mr.menu_code = m.code
-        WHERE mr.role_code = #{roleCode}
-    </select>
+	    SELECT m.* 
+	    FROM portal_menu m
+	    INNER JOIN portal_menu_role mr ON mr.menu_code = m.code
+	    WHERE mr.role_code = #{roleCode} AND m.status = '1'
+	    ORDER BY m.priority
+	</select>
+
 
 </mapper>

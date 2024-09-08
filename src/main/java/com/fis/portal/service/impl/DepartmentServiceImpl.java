@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.fis.portal.mapper.DepartmentMapper;
 import com.fis.portal.model.BaseListResponse;
+import com.fis.portal.model.BasePaging;
 import com.fis.portal.model.BaseResponse;
 import com.fis.portal.model.Department;
 import com.fis.portal.service.IDepartmentService;
@@ -17,21 +18,19 @@ public class DepartmentServiceImpl implements IDepartmentService {
     private DepartmentMapper departmentMapper;
 
     @Override
-    public BaseResponse search(Department request) {
+    public BaseListResponse search(Department request) {
         List<Department> list = departmentMapper.search(request);
         int totalRecords = departmentMapper.count(request);
-        return new BaseListResponse(list, totalRecords);
-    }
-    
-    @Override
-    public BaseResponse getAllDepartments() {
-        List<Department> department = departmentMapper.getAllDepartments();
-        return new BaseListResponse(department, department.size());
+        
+        BasePaging basePaging = new BasePaging();
+        basePaging.setData(list);
+        basePaging.setTotal(totalRecords);
+        
+        return new BaseListResponse("OK", true , basePaging);
     }
 
     @Override
 	public BaseResponse create(Department department) {
-		// TODO Auto-generated method stub
 		try {
             // Kiểm tra xem người dùng đã tồn tại chưa
             Department existingDepartment = departmentMapper.findByCode(department.getCode());

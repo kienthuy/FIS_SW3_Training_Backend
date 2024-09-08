@@ -4,25 +4,29 @@
 
     <!-- Tìm kiếm hạn mức sử dụng -->
     <select id="search" resultType="com.fis.portal.model.Limit">
-        <![CDATA[
-            SELECT * FROM portal_limit
-        ]]>
-        <where>
-            <if test="code != null and code != ''">
-                AND code = #{code}
-            </if>
-            <if test="name != null and name != ''">
-                AND name LIKE CONCAT('%', #{name}, '%')
-            </if>
-            <if test="status != null and status != ''">
-                AND status = #{status}
-            </if>
-        </where>
-        <if test="limit > 0">
-            OFFSET (#{page}-1) * #{limit} ROWS
-            FETCH NEXT #{limit} ROWS ONLY
-        </if>
-    </select>
+	    <![CDATA[
+	        SELECT * FROM portal_limit
+	    ]]>
+	    <where>
+	        <if test="code != null and code != ''">
+	            AND code = #{code}
+	        </if>
+	        <if test="name != null and name != ''">
+	            AND name LIKE CONCAT('%', #{name}, '%')
+	        </if>
+	        <if test="status != null and status != ''">
+	            AND status = #{status}
+	        </if>
+	    </where>
+	    <!-- Always apply the ORDER BY clause -->
+	    ORDER BY code
+	    <if test="pageSize != null and pageNum != null">
+	        LIMIT #{pageSize}
+	        OFFSET (#{pageNum} - 1) * #{pageSize}
+	    </if>
+	</select>
+
+
 
     <!-- Tìm hạn mức sử dụng theo mã -->
     <select id="findByCode" resultType="com.fis.portal.model.Limit">
@@ -68,7 +72,7 @@
                 #{name},
                 #{nameEn},
                 #{description},
-                #{limit},
+                #{limitValue},
                 #{status},
                 NOW(),
                 #{createdBy}
@@ -81,9 +85,9 @@
         <![CDATA[
             UPDATE portal_limit
             SET name = #{name},
-                name_en = #{nameEn}, <!-- Thêm trường name_en -->
+                name_en = #{nameEn},
                 description = #{description},
-                limit_value = #{limit}, <!-- Thay đổi từ max_limit thành limit -->
+                limit_value = #{limitValue},
                 status = #{status},
                 updated_date = NOW(),
                 updated_by = #{updatedBy}

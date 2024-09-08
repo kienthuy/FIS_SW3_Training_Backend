@@ -5,12 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fis.portal.model.BaseListResponse;
 import com.fis.portal.model.BaseResponse;
 import com.fis.portal.model.Position;
 import com.fis.portal.service.IPositionService;
@@ -23,7 +23,7 @@ public class PositionController {
 	IPositionService positionService;
 
 	@PostMapping(value = "/search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<BaseResponse> search(@RequestBody Position request) {
+	public ResponseEntity<BaseListResponse> search(@RequestBody Position request) {
 		return new ResponseEntity<>(positionService.search(request), HttpStatus.OK);
 	}
 
@@ -37,8 +37,4 @@ public class PositionController {
 		return new ResponseEntity<>(positionService.update(position), HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<BaseResponse> getAllPostions() {
-		return new ResponseEntity<>(positionService.getAllPositions(), HttpStatus.OK);
-	}
 }

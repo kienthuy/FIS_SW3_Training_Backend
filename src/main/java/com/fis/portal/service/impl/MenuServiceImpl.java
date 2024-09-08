@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.fis.portal.mapper.MenuMapper;
 import com.fis.portal.model.BaseListResponse;
+import com.fis.portal.model.BasePaging;
 import com.fis.portal.model.BaseResponse;
 import com.fis.portal.model.Menu;
 import com.fis.portal.service.IMenuService;
@@ -20,10 +21,15 @@ public class MenuServiceImpl implements IMenuService {
     private MenuMapper menuMapper;
 
     @Override
-    public BaseResponse search(Menu request) {
+    public BaseListResponse search(Menu request) {
         List<Menu> list = menuMapper.search(request);
         int totalRecords = menuMapper.count(request);
-        return new BaseListResponse(list, totalRecords);
+        
+        BasePaging basePaging = new BasePaging();
+        basePaging.setData(list);
+        basePaging.setTotal(totalRecords);
+        
+        return new BaseListResponse("OK", true , basePaging);
     }
 
     @Override

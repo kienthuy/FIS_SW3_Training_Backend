@@ -1,11 +1,12 @@
 package com.fis.portal.service;
 
+import com.fis.portal.model.BaseListResponse;
 import com.fis.portal.model.BaseResponse;
 import com.fis.portal.model.Limit;
 
 public interface ILimitService {
 	
-	BaseResponse search(Limit request);
+	BaseListResponse search(Limit request);
 
 	BaseResponse update(Limit limit);
 

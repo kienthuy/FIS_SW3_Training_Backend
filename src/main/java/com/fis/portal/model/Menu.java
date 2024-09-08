@@ -10,12 +10,21 @@ public class Menu {
     private String path;
     private String status;
     private String parentCode;
+    private int priority;
     private Date createdDate;
     private String createdBy;
     private Date updatedDate;
     private String updatedBy;
+    
+    public int getPriority() {
+		return priority;
+	}
 
-    public String getCode() {
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+
+	public String getCode() {
         return code;
     }
 

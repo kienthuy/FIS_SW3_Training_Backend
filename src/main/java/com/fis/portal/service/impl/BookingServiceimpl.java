@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.fis.portal.mapper.BookingMapper;
 import com.fis.portal.model.BaseListResponse;
+import com.fis.portal.model.BasePaging;
 import com.fis.portal.model.BaseResponse;
 import com.fis.portal.model.Booking;
 import com.fis.portal.service.IBookingService;
@@ -18,10 +19,15 @@ public class BookingServiceimpl implements IBookingService {
     private BookingMapper bookingMapper;
 
     @Override
-    public BaseResponse search(Booking request) {
+    public BaseListResponse search(Booking request) {
         List<Booking> list = bookingMapper.search(request);
         int totalRecords = bookingMapper.count(request);
-        return new BaseListResponse(list, totalRecords);
+        
+        BasePaging basePaging = new BasePaging();
+        basePaging.setData(list);
+        basePaging.setTotal(totalRecords);
+        
+        return new BaseListResponse("OK", true , basePaging);
     }
 
     @Override

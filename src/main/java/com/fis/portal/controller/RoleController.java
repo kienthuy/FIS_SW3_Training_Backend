@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fis.portal.model.BaseListResponse;
 import com.fis.portal.model.BaseResponse;
-import com.fis.portal.model.Menu;
 import com.fis.portal.model.Role;
-import com.fis.portal.service.IMenuService;
 import com.fis.portal.service.IRoleService;
 
 @CrossOrigin()
@@ -24,7 +23,7 @@ public class RoleController {
     IRoleService roleService;
 	
 	@PostMapping(value = "/search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BaseResponse> search(@RequestBody Role request) {
+    public ResponseEntity<BaseListResponse> search(@RequestBody Role request) {
         return new ResponseEntity<>(roleService.search(request), HttpStatus.OK);
     }
 	// Thêm phương thức create

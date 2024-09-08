@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fis.portal.model.BaseListResponse;
 import com.fis.portal.model.BaseResponse;
 import com.fis.portal.model.Booking;
 import com.fis.portal.service.IBookingService;
@@ -23,7 +24,7 @@ public class BookingController {
     private IBookingService bookingService;
 
     @PostMapping(value = "/search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BaseResponse> search(@RequestBody Booking request) {
+    public ResponseEntity<BaseListResponse> search(@RequestBody Booking request) {
         return new ResponseEntity<>(bookingService.search(request), HttpStatus.OK);
     }
 

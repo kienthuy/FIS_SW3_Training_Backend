@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.fis.portal.mapper.BranchMapper;
 import com.fis.portal.model.BaseListResponse;
+import com.fis.portal.model.BasePaging;
 import com.fis.portal.model.BaseResponse;
 import com.fis.portal.model.Branch;
 import com.fis.portal.service.IBranchService;
@@ -18,10 +19,15 @@ public class BranchServiceImpl implements IBranchService {
     private BranchMapper branchMapper;
 
     @Override
-    public BaseResponse search(Branch request) {
+    public BaseListResponse search(Branch request) {
         List<Branch> list = branchMapper.search(request);
         int totalRecords = branchMapper.count(request);
-        return new BaseListResponse(list, totalRecords);
+        
+        BasePaging basePaging = new BasePaging();
+        basePaging.setData(list);
+        basePaging.setTotal(totalRecords);
+        
+        return new BaseListResponse("OK", true , basePaging);
     }
 
     @Override

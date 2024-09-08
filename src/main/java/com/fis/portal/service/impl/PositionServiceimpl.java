@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.fis.portal.mapper.PositionMapper;
 import com.fis.portal.model.BaseListResponse;
+import com.fis.portal.model.BasePaging;
 import com.fis.portal.model.BaseResponse;
 import com.fis.portal.model.Position;
 import com.fis.portal.service.IPositionService;
@@ -17,17 +18,16 @@ public class PositionServiceimpl implements IPositionService{
 	    private PositionMapper positionMapper;
 
 	    @Override
-	    public BaseResponse search(Position request) {
+	    public BaseListResponse search(Position request) {
 	        List<Position> list = positionMapper.search(request);
 	        int totalRecords = positionMapper.count(request);
-	        return new BaseListResponse(list, totalRecords);
+	        
+	        BasePaging basePaging = new BasePaging();
+	        basePaging.setData(list);
+	        basePaging.setTotal(totalRecords);
+	        
+	        return new BaseListResponse("OK", true , basePaging);
 	    }
-	    @Override
-	    public BaseResponse getAllPositions() {
-	        List<Position> position = positionMapper.getAllpositions();
-	        return new BaseListResponse(position, position.size());
-	    }
-	    
 
 	    @Override
 		public BaseResponse create(Position position) {

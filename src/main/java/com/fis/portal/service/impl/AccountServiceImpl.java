@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.fis.portal.mapper.AccountMapper;
 import com.fis.portal.model.Account;
 import com.fis.portal.model.BaseListResponse;
+import com.fis.portal.model.BasePaging;
 import com.fis.portal.model.BaseResponse;
 import com.fis.portal.model.Product;
 import com.fis.portal.service.IAccountService;
@@ -19,10 +20,15 @@ public class AccountServiceImpl implements IAccountService {
     private AccountMapper accountMapper;
 
     @Override
-    public BaseResponse search(Account request) {
+    public BaseListResponse search(Account request) {
         List<Account> list = accountMapper.search(request);
         int totalRecords = accountMapper.count(request);
-        return new BaseListResponse(list, totalRecords);
+        
+        BasePaging basePaging = new BasePaging();
+        basePaging.setData(list);
+        basePaging.setTotal(totalRecords);
+        
+        return new BaseListResponse("OK", true , basePaging);
     }
 
     @Override

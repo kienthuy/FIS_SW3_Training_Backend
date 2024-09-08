@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.fis.portal.mapper.ProductMapper;
 import com.fis.portal.model.BaseListResponse;
+import com.fis.portal.model.BasePaging;
 import com.fis.portal.model.BaseResponse;
 import com.fis.portal.model.Product;
 import com.fis.portal.service.IProductService;
@@ -18,10 +19,15 @@ public class ProductServiceImpl implements IProductService {
     private ProductMapper productMapper;
 
     @Override
-    public BaseResponse search(Product request) {
+    public BaseListResponse search(Product request) {
         List<Product> list = productMapper.search(request);
         int totalRecords = productMapper.count(request);
-        return new BaseListResponse(list, totalRecords);
+        
+        BasePaging basePaging = new BasePaging();
+        basePaging.setData(list);
+        basePaging.setTotal(totalRecords);
+        
+        return new BaseListResponse("OK", true , basePaging);
     }
 
     @Override

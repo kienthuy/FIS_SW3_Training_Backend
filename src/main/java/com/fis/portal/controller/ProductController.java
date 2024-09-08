@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fis.portal.model.BaseListResponse;
 import com.fis.portal.model.BaseResponse;
-
 import com.fis.portal.model.Product;
 import com.fis.portal.service.IProductService;
 
@@ -25,7 +25,7 @@ public class ProductController {
     private IProductService productService;
 
     @PostMapping(value = "/search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BaseResponse> search(@RequestBody Product request) {
+    public ResponseEntity<BaseListResponse> search(@RequestBody Product request) {
         return new ResponseEntity<>(productService.search(request), HttpStatus.OK);
     }
 

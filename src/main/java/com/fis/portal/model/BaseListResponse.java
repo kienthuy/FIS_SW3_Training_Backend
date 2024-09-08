@@ -1,37 +1,37 @@
 package com.fis.portal.model;
 
 
-public class BaseListResponse extends BaseResponse{
-
-    private long total;
-
-    public long getTotal() {
-        return total;
-    }
-
-    public void setTotal(long total) {
-        this.total = total;
-    }
-
-    public BaseListResponse() {
-    }
-
-    public BaseListResponse(long total) {
-        super();
-        this.total = total;
-    }
-
-    public BaseListResponse(Object data,long total) {
-        super(data);
-        this.total = total;
-    }
-
-    public BaseListResponse(Object data, String errorCode, String errorDesc, long total) {
-        super(data, errorCode, errorDesc);
-        this.total = total;
-    }
-
-    public BaseListResponse(Object data) {
-        super(data);
-    }
+public class BaseListResponse {
+	private String message;
+	private boolean status;
+    private BasePaging result;
+    
+    
+	public BaseListResponse(String message, boolean status, BasePaging result) {
+		super();
+		this.message = message;
+		this.status = status;
+		this.result = result;
+	}
+	
+	
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	public BasePaging getResult() {
+		return result;
+	}
+	public void setResult(BasePaging result) {
+		this.result = result;
+	}
+    
 }

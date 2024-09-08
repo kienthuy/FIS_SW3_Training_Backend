@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.fis.portal.mapper.CurrencyMapper;
 import com.fis.portal.model.BaseListResponse;
+import com.fis.portal.model.BasePaging;
 import com.fis.portal.model.BaseResponse;
 import com.fis.portal.model.Currency;
 import com.fis.portal.service.ICurrencyService;
@@ -18,14 +19,19 @@ public class CurrencyServiceImpl implements ICurrencyService {
     private CurrencyMapper currencyMapper;
 
     @Override
-    public BaseResponse search(Currency request) {
+    public BaseListResponse search(Currency request) {
         try {
             List<Currency> list = currencyMapper.search(request);
             int totalRecords = currencyMapper.count(request);
-            return new BaseListResponse(list, totalRecords);
+            
+            BasePaging basePaging = new BasePaging();
+            basePaging.setData(list);
+            basePaging.setTotal(totalRecords);
+            
+            return new BaseListResponse("OK", true , basePaging);
         } catch (Exception ex) {
             ex.printStackTrace();
-            return new BaseResponse("1", "Tìm kiếm loại tiền thất bại");
+            return new BaseListResponse("NO OK", false , null);
         }
     }
 

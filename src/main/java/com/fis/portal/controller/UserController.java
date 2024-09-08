@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fis.portal.model.BaseListResponse;
 import com.fis.portal.model.BaseResponse;
 import com.fis.portal.model.User;
 import com.fis.portal.service.IUserService;
@@ -22,7 +23,7 @@ public class UserController {
     IUserService userService;
 	
 	@PostMapping(value = "/search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BaseResponse> search(@RequestBody User request) {
+    public ResponseEntity<BaseListResponse> search(@RequestBody User request) {
         return new ResponseEntity<>(userService.search(request), HttpStatus.OK);
     }
 	// Thêm phương thức create
